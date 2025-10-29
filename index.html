@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trev's Tire and Repair | Professional Auto Service in St. George, UT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --light-accent: #0f3460;
+            --text-light: #ffffff;
+            --text-dark: #1a1a2e;
+            --bg-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Top Contact Bar */
+        .top-bar {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-bar a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section - Full Screen */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 20px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .hero-image {
+            max-width: 90%;
+            max-height: 50vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 30px;
+            border: 4px solid var(--accent-color);
+        }
+
+        .hero-fallback {
+            width: 200px;
+            height: 200px;
+            background: var(--light-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 4px solid var(--accent-color);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-color);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #d63851;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 50px;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 5px 15px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 20px;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .section-alt {
+            background: var(--bg-light);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid var(--light-accent);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Hours Table */
+        .hours-table {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            border: 2px solid var(--light-accent);
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-row:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        .day {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .time {
+            color: var(--text-dark);
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .stars {
+            color: #ffa500;
+            font-size: 1.2rem;
+        }
+
+        .review-body {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .show-more-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 30px;
+            background: var(--light-accent);
+            color: var(--text-light);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .show-more-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-color);
+            color: var(--text-light);
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #d63851;
+        }
+
+        /* Map Section */
+        .map-container {
+            max-width: 900px;
+            margin: 30px auto;
+            height: 450px;
+            border: 3px solid var(--light-accent);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Square Payment Link */
+        .square-link-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .square-link {
+            display: inline-block;
+            padding: 20px 50px;
+            background: var(--light-accent);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 3px solid var(--accent-color);
+        }
+
+        .square-link:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--secondary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <a href="tel:+14352517025">📞 Call Now: (435) 251-7025</a>
+    </div>
+
+    <!-- Hero Section - Full Screen -->
+    <section class="hero">
+        <img src="Trevs-Tire-and-Repair.png" alt="Trev's Tire and Repair" class="hero-image" onerror="this.style.display='none'; document.querySelector('.hero-fallback').style.display='flex';">
+        <div class="hero-fallback" style="display: none;">
+            <h2 style="color: var(--text-light);">TREV'S TIRE</h2>
+        </div>
+        <h1>Trev's Tire and Repair</h1>
+        <p>Professional Auto Service You Can Trust in St. George, UT</p>
+        <a href="#contact" class="cta-button">SCHEDULE SERVICE</a>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#hours">Hours</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#location">Location</a></li>
+        </ul>
+    </nav>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Tire Services</h3>
+                    <p>Professional tire installation, rotation, balancing, and repair services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brake Service</h3>
+                    <p>Complete brake inspection, repair, and replacement to keep you safe.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Oil Changes</h3>
+                    <p>Quick and thorough oil change service to keep your engine running smooth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Diagnostics</h3>
+                    <p>Advanced diagnostic services to identify and solve any vehicle issues.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Suspension</h3>
+                    <p>Expert suspension repair and maintenance for a comfortable ride.</p>
+                </div>
+                <div class="service-card">
+                    <h3>General Repair</h3>
+                    <p>Comprehensive auto repair services for all makes and models.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="section-alt">
+        <div class="container">
+            <h2>Business Hours</h2>
+            <div class="hours-table">
+                <div class="hours-row">
+                    <span class="day">Monday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Tuesday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Wednesday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Thursday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Friday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Saturday</span>
+                    <span class="time">Closed</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Sunday</span>
+                    <span class="time">Closed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews">
+        <div class="container">
+            <h2>Customer Reviews</h2>
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be inserted here by JavaScript -->
+            </div>
+            <button class="show-more-btn hidden" id="showMoreBtn" onclick="showMoreReviews()"></button>
+        </div>
+    </section>
+
+    <!-- Square Payment Link -->
+    <section class="section-alt">
+        <div class="container">
+            <h2>Pay Online</h2>
+            <div class="square-link-container">
+                <!-- REPLACE YOUR_LOCATION_ID WITH YOUR ACTUAL SQUARE LOCATION ID -->
+                <a href="https://square.link/u/YOUR_LOCATION_ID" class="square-link" target="_blank">PAY WITH SQUARE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            </form>
+            <p style="text-align: center; margin-top: 30px; font-size: 1.2rem;">
+                Or email us directly at: <a href="mailto:trevstireandrepair@gmail.com" style="color: var(--accent-color); font-weight: 600;">trevstireandrepair@gmail.com</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section-alt">
+        <div class="container">
+            <h2>Visit Us</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">
+                <strong>630 N 3050 E D6, St. George, UT 84790</strong>
+            </p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13983747.563438699!2d-107.52179214691822!3d31.165251015238823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ca5b3d06081f67%3A0xa8eba9b915b91d21!2sTrevstireandrepair!5e0!3m2!1sen!2sus!4v1761697471733!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://www.google.com/maps/place/Trevstireandrepair/@31.165251,-107.5217921,5z/data=!4m10!1m2!2m1!1sTrevstireandrepair!3m6!1s0x80ca5b3d06081f67:0xa8eba9b915b91d21!8m2!3d37.1192984!4d-113.5200524!15sChJUcmV2c3RpcmVhbmRyZXBhaXKSAQl0aXJlX3Nob3DgAQA!16s%2Fg%2F11jzhpjhh_?entry=ttu&g_ep=EgoyMDI1MTAyNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color: var(--accent-color); font-weight: 600; font-size: 1.1rem;">View on Google Maps →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Links Section -->
+    <section>
+        <div class="container">
+            <h2>Connect With Us</h2>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=61557626738142#" class="social-link" target="_blank">Facebook</a>
+                <a href="https://github.com/JamesBrownR/Trev-s-Tire-and-Repair/new/main" class="social-link" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Trev's Tire and Repair. All rights reserved.</p>
+        <p>Owner: Trevon | <a href="tel:+14352517025">(435) 251-7025</a> | <a href="mailto:trevstireandrepair@gmail.com">trevstireandrepair@gmail.com</a></p>
+    </footer>
+
+    <script>
+        // Reviews Array - Easy to add more reviews
+        const reviews = [
+            { name: "Review 1", rating: 5, body: "" },
+            { name: "Review 2", rating: 5, body: "" },
+            { name: "Review 3", rating: 5, body: "" },
+            { name: "Review 4", rating: 5, body: "" },
+            { name: "Review 5", rating: 5, body: "" },
+            { name: "Review 6", rating: 5, body: "" }
+        ];
+
+        const reviewsPerPage = 6;
+        let currentReviewCount = 0;
+
+        function renderReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            
+            // Calculate how many reviews to show
+            const reviewsToShow = Math.min(currentReviewCount + reviewsPerPage, reviews.length);
+            
+            // Render initial or additional reviews
+            for (let i = currentReviewCount; i < reviewsToShow; i++) {
+                const review = reviews[i];
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <span class="reviewer-name">${review.name}</span>
+                        <span class="stars">${'★'.repeat(review.rating)}</span>
+                    </div>
+                    ${review.body ? `<div class="review-body">${review.body}</div>` : ''}
+                `;
+                container.appendChild(reviewCard);
+            }
+            
+            currentReviewCount = reviewsToShow;
+            
+            // Update or hide the "Show More" button
+            if (currentReviewCount < reviews.length) {
+                const remaining = reviews.length - currentReviewCount;
+                showMoreBtn.textContent = `Show ${remaining} More (Total ${reviews.length})`;
+                showMoreBtn.classList.remove('hidden');
+            } else {
+                showMoreBtn.classList.add('hidden');
+            }
+        }
+
+        function showMoreReviews() {
+            renderReviews();
+        }
+
+        // Initial render
+        renderReviews();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
